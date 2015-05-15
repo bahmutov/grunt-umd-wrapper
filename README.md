@@ -83,7 +83,8 @@ Usually package version, you can include it in your umd template as `%VERSION%`
 Type: `String`
 Default value: ''
 
-Git id, you can include it in the umd template as `%GITREV%`
+Git id, you can include it in the umd template as `%GITREV%`. Useful if the output file is NOT
+checked into the git repo (otherwise every grunt execution changes the committed file).
 
 ### Module definition file
 A module is defined in a javascript file which contains some preprocessing tags that describes the module dependencies. 
