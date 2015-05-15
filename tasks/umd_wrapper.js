@@ -43,7 +43,7 @@ module.exports = function(grunt) {
                 } else {
                     cjs_req.push("require('"+imp.key+"');");
                 }
-                amd_req.push("'"+imp.key+"'");          
+                amd_req.push("'"+imp.key+"'");
             }
 
             var src = this.source;
@@ -55,7 +55,9 @@ module.exports = function(grunt) {
                 CJS_REQUIRES: cjs_req.join('\n'),
                 EXPORT_NAME: this.exports,
                 ROOT: root,
-                SRC: src
+                SRC: src,
+                VERSION: options.version,
+                GITREV: options.gitrev
             };
 
             return tpl.replace(/%([^%]+)%/g, function(m0, m1) {
@@ -122,7 +124,7 @@ module.exports = function(grunt) {
                         grunt.fail('Syntax error: @html requires the as token. Example: @html file/path as varName', 3);
                     }
                 } else { // ignore - log warn?
-                    return m0;                    
+                    return m0;
                 }
             });
             out = '\n'+out.trim()+'\n';
@@ -150,7 +152,9 @@ module.exports = function(grunt) {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       template: 'umd',
-      rootName: 'root'
+      rootName: 'root',
+      version: '',
+      gitrev: ''
     });
 
     var hasErrors = false;
@@ -163,16 +167,16 @@ module.exports = function(grunt) {
             templatePath = path.join(__dirname, templatePath+'.template');
             if (!grunt.file.isFile(templatePath)) {
                 grunt.fail("Could not find wrapper template: "+options['template']+".", 3);
-            }            
+            }
         }
         var template = grunt.file.read(templatePath);
         var out = new ModuleProcessor(options).process(f.src, template, options);
-        grunt.file.write(f.dest, out);  
+        grunt.file.write(f.dest, out);
         grunt.log.writeln('File "' + f.dest + '" created.');
 
     });
 
   });
 
-  
+
 };

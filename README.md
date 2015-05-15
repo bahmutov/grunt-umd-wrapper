@@ -73,6 +73,17 @@ The name of the 'root' variable passed to the wrapper factory function as the fi
 
 You can find more information about this at https://github.com/umdjs/umd/blob/master/returnExports.js 
 
+#### options.version
+Type: `String`
+Default value: ''
+
+Usually package version, you can include it in your umd template as `%VERSION%`
+
+#### options.gitrev
+Type: `String`
+Default value: ''
+
+Git id, you can include it in the umd template as `%GITREV%`
 
 ### Module definition file
 A module is defined in a javascript file which contains some preprocessing tags that describes the module dependencies. 
